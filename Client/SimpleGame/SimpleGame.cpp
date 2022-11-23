@@ -19,9 +19,19 @@ but WITHOUT ANY WARRANTY.
 #include <gl/freeglut.h>
 #include "GSEGame.h"
 #include "GSEGlobals.h"
+#include "Title.h"
+
+#define SERVERIP "172.30.1.11"
+#define SERVERPORT 9000
 
 GSEGame* g_game = NULL;
 KeyInput g_inputs;
+Title* g_title = NULL;
+WSADATA wsa;
+SOCKET sock;
+SOCKADDR_IN serveraddr;
+int retval;
+
 
 int g_prevTimeInMillisecond = 0;
 int px = 15; int py = 15;
@@ -194,6 +204,30 @@ void SpecialKeyUpInput(int key, int x, int y)
 	}
 }
 
+void err_quit(char* msg)
+{
+}
+
+void err_display(char* msg)
+{
+}
+
+int connect()
+{
+	// 소켓 생성
+	sock = socket(AF_INET, SOCK_STREAM, 0);
+	if (sock == INVALID_SOCKET) err_quit("socket()");
+
+	// 서버 연결()
+	ZeroMemory(&serveraddr, sizeof(serveraddr));
+	serveraddr.sin_family = AF_INET;
+	inet_pton(AF_INET, SERVERIP, &(serveraddr.sin_addr.s_addr));
+	serveraddr.sin_port = htons(SERVERPORT);
+	retval = connect(sock, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
+	if (retval == SOCKET_ERROR) err_quit("connect()");
+}
+
+
 int main(int argc, char** argv)
 {
 	// Initialize GL things
@@ -201,8 +235,10 @@ int main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(0, 0);
 	glutInitWindowSize(GSE_WINDOW_WIDTH, GSE_WINDOW_HEIGHT);
-	glutCreateWindow("Game Software Engineering KPU");
+	glutCreateWindow("Net Game");
 
+
+	// Initialize Renderer
 	glewInit();
 	if (glewIsSupported("GL_VERSION_3_0"))
 	{
@@ -213,9 +249,15 @@ int main(int argc, char** argv)
 		std::cout << "GLEW 3.0 not supported\n ";
 	}
 
-	// Initialize Renderer
+	//윈속 초기화
+	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
+		return 1;
+	//소켓 생성, 서버 연결
+	connect();
+
 
 	g_game = new GSEGame();
+	g_title = new Title();
 	memset(&g_inputs, 0, sizeof(KeyInput));
 
 	glutDisplayFunc(Idle);
@@ -233,6 +275,10 @@ int main(int argc, char** argv)
 	glutMainLoop();
 
 	delete g_game;
+
+	// 서버 연결 종료, 윈속 종료
+	closesocket(sock);
+	WSACleanup();
 
 	return 0;
 }

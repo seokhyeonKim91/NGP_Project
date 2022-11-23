@@ -36,6 +36,9 @@
     <ClInclude Include="GSEGlobals.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -50,7 +53,7 @@
     <ClCompile Include="GSEGame.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GSEObject.cpp">
+    <ClCompile Include="Title.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
