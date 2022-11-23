@@ -23,6 +23,7 @@ but WITHOUT ANY WARRANTY.
 
 #define SERVERIP "172.30.1.11"
 #define SERVERPORT 9000
+#define BUFSIZE    512
 
 GSEGame* g_game = NULL;
 KeyInput g_inputs;
@@ -212,7 +213,7 @@ void err_display(char* msg)
 {
 }
 
-int connect()
+int ConnectServer()
 {
 	// 家南 积己
 	sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -227,6 +228,30 @@ int connect()
 	if (retval == SOCKET_ERROR) err_quit("connect()");
 }
 
+int Ready_check()
+{
+	g_title->RendererScene();
+}
+
+int SendServer()
+{
+	retval = send(sock, (const char*)(&g_inputs), sizeof(g_inputs), 0);
+	if (retval == SOCKET_ERROR) 
+	{
+		err_display("");
+	}
+}
+
+int RecvClient()
+{
+	retval = recv(sock, reinterpret_cast<char*>(&mapData), sizeof(mapData), 0);
+	if (retval == SOCKET_ERROR) {
+		err_display("");
+	}
+
+	g_game->SetMapData(mapData);
+	g_game->RendererGameScene();
+}
 
 int main(int argc, char** argv)
 {
@@ -253,7 +278,7 @@ int main(int argc, char** argv)
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		return 1;
 	//家南 积己, 辑滚 楷搬
-	connect();
+	ConnectServer();
 
 
 	g_game = new GSEGame();
