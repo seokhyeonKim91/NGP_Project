@@ -7,6 +7,11 @@ it under the terms of the What The Hell License. Do it plz.
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY.
 */
+#pragma comment(lib, "ws2_32")
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <stdlib.h>
+#include <conio.h>
 
 #include "stdafx.h"
 #include <iostream>
