@@ -217,7 +217,7 @@ int ConnectServer()
 {
 	// 家南 积己
 	sock = socket(AF_INET, SOCK_STREAM, 0);
-	if (sock == INVALID_SOCKET) err_quit("socket()");
+	if (sock == INVALID_SOCKET) err_quit("");
 
 	// 辑滚 楷搬()
 	ZeroMemory(&serveraddr, sizeof(serveraddr));
@@ -225,11 +225,16 @@ int ConnectServer()
 	inet_pton(AF_INET, SERVERIP, &(serveraddr.sin_addr.s_addr));
 	serveraddr.sin_port = htons(SERVERPORT);
 	retval = connect(sock, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
-	if (retval == SOCKET_ERROR) err_quit("connect()");
+	if (retval == SOCKET_ERROR) err_quit("");
 }
 
 int Ready_check()
 {
+	//
+	if (retval == SOCKET_ERROR) 
+	{
+		err_display("");
+	}
 	g_title->RendererScene();
 }
 
@@ -244,8 +249,9 @@ int SendServer()
 
 int RecvClient()
 {
-	retval = recv(sock, reinterpret_cast<char*>(&mapData), sizeof(mapData), 0);
-	if (retval == SOCKET_ERROR) {
+	retval = recv(sock, (char*)(&mapData), sizeof(mapData), 0);
+	if (retval == SOCKET_ERROR) 
+	{
 		err_display("");
 	}
 
