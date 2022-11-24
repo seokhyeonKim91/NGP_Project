@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
-
 #include <gl/glew.h>
 #include <gl/freeglut.h>
 
