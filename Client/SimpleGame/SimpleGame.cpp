@@ -212,7 +212,7 @@ void err_display(char* msg)
 {
 }
 
-int ConnectServer()
+/*int ConnectServer(void)
 {
 	// 家南 积己
 	sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -225,7 +225,7 @@ int ConnectServer()
 	serveraddr.sin_port = htons(SERVERPORT);
 	retval = connect(sock, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
 	if (retval == SOCKET_ERROR) err_quit("");
-}
+}*/
 
 int Ready_check()
 {
@@ -237,7 +237,7 @@ int Ready_check()
 	g_title->RendererScene();
 }
 
-int SendServer()
+int SendServer(void)
 {
 	retval = send(sock, (const char*)(&g_inputs), sizeof(g_inputs), 0);
 	if (retval == SOCKET_ERROR) 
@@ -246,7 +246,7 @@ int SendServer()
 	}
 }
 
-int RecvClient()
+int RecvClient(void)
 {
 	retval = recv(sock, (char*)(&mapData), sizeof(mapData), 0);
 	if (retval == SOCKET_ERROR) 
@@ -283,8 +283,19 @@ int main(int argc, char** argv)
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		return 1;
 	//家南 积己, 辑滚 楷搬
-	ConnectServer();
+	//ConnectServer();
+	// 家南 积己
+	sock = socket(AF_INET, SOCK_STREAM, 0);
+	if (sock == INVALID_SOCKET) err_quit("");
 
+	// 辑滚 楷搬()
+	ZeroMemory(&serveraddr, sizeof(serveraddr));
+	serveraddr.sin_family = AF_INET;
+	inet_pton(AF_INET, SERVERIP, &(serveraddr.sin_addr.s_addr));
+	serveraddr.sin_port = htons(SERVERPORT);
+	retval = connect(sock, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
+	if (retval == SOCKET_ERROR) err_quit("");
+	//
 
 	g_game = new GSEGame();
 	g_title = new Title();

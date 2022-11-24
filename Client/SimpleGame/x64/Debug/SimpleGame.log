@@ -1,7 +1,4 @@
 ﻿  SimpleGame.cpp
-  Title.cpp
-  코드를 생성하고 있습니다...
-c:\users\administrator\documents\github\ngp_project\client\simplegame\simplegame.cpp(228): error C4716: 'ConnectServer': 값을 반환해야 합니다.
-c:\users\administrator\documents\github\ngp_project\client\simplegame\simplegame.cpp(247): error C4716: 'SendServer': 값을 반환해야 합니다.
 c:\users\administrator\documents\github\ngp_project\client\simplegame\simplegame.cpp(238): error C4716: 'Ready_check': 값을 반환해야 합니다.
+c:\users\administrator\documents\github\ngp_project\client\simplegame\simplegame.cpp(247): error C4716: 'SendServer': 값을 반환해야 합니다.
 c:\users\administrator\documents\github\ngp_project\client\simplegame\simplegame.cpp(259): error C4716: 'RecvClient': 값을 반환해야 합니다.
