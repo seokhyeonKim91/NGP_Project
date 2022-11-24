@@ -8,17 +8,16 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY.
 */
 #pragma comment(lib, "ws2_32")
+
+#include "stdafx.h"
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <stdlib.h>
 #include <conio.h>
-
-#include "stdafx.h"
 #include <iostream>
 #include <gl/glew.h>
 #include <gl/freeglut.h>
-#include "GSEGame.h"
-#include "GSEGlobals.h"
+
 #include "Title.h"
 
 #define SERVERIP "172.30.1.11"

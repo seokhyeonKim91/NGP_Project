@@ -1,2 +1,7 @@
-﻿  Title.cpp
-D:\NGP_Project\Client\SimpleGame\Title.cpp(19,1): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+﻿  SimpleGame.cpp
+  Title.cpp
+  코드를 생성하고 있습니다...
+c:\users\administrator\documents\github\ngp_project\client\simplegame\simplegame.cpp(228): error C4716: 'ConnectServer': 값을 반환해야 합니다.
+c:\users\administrator\documents\github\ngp_project\client\simplegame\simplegame.cpp(247): error C4716: 'SendServer': 값을 반환해야 합니다.
+c:\users\administrator\documents\github\ngp_project\client\simplegame\simplegame.cpp(238): error C4716: 'Ready_check': 값을 반환해야 합니다.
+c:\users\administrator\documents\github\ngp_project\client\simplegame\simplegame.cpp(259): error C4716: 'RecvClient': 값을 반환해야 합니다.
