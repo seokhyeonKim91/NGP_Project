@@ -47,8 +47,7 @@ void err_display(char* msg)
 
 // 타이틀 쓰레드 구현
 DWORD WINAPI TitleThread(LPVOID arg)
-{
-    printf("Running LobbyThread\n");
+{   
     int retval;
 
     // 윈속 초기화
