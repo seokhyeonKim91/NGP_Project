@@ -105,10 +105,27 @@ DWORD WINAPI TitleThread(LPVOID arg)
         gameData.CreatePlayer(client_sock);
 
         ////////////////////////////////////////////////////////////////
-        // 한 것: 타이틀 쓰레드의 소켓 연결 부분 구현
-        // 해야할: 타이틀 쓰레드에 연결되었다는 건 플레이어가 게임을 할
-        // 준비를 마쳤다는 뜻이므로 
-        // 뒤이어 실행할 쓰레드들을 추가로 구현해야한다.
+        if (MatchingQueue.size() == MAX_PLAYER)
+        {
+            startGame = true;
+
+            for (int i = 0; i < 3; ++i)
+            {
+                retval = send(MatchingQueue[i], (char*)&startGame, sizeof(startGame), 0);
+
+                TThread = CreateThread(NULL, 0, TitleThread, (LPVOID)MatchingQueue[i], 0, NULL);
+                if (TThread == NULL) { closesocket(client_sock); }
+            }          
+
+            ExitThread(0);
+        }
+        else
+        {
+            for (int i = 0; i < MatchingQueue.size(); ++i)
+            {
+                retval = send(MatchingQueue[i], (char*)&startGame, sizeof(startGame), 0);
+            }
+        }
         //////////////////////////////////////////////////////////////// 
 
     }
