@@ -227,7 +227,7 @@ void err_display(char* msg)
 	if (retval == SOCKET_ERROR) err_quit("");
 }*/
 
-int Ready_check()
+int ReadyCheck()
 {
 	//
 	if (retval == SOCKET_ERROR) 
@@ -253,7 +253,6 @@ int RecvClient(void)
 	{
 		err_display("");
 	}
-
 	g_game->SetMapData(mapData);
 	g_game->RendererGameScene();
 }

@@ -1,4 +1,28 @@
-﻿  SimpleGame.cpp
-c:\users\administrator\documents\github\ngp_project\client\simplegame\simplegame.cpp(238): error C4716: 'Ready_check': 값을 반환해야 합니다.
-c:\users\administrator\documents\github\ngp_project\client\simplegame\simplegame.cpp(247): error C4716: 'SendServer': 값을 반환해야 합니다.
-c:\users\administrator\documents\github\ngp_project\client\simplegame\simplegame.cpp(259): error C4716: 'RecvClient': 값을 반환해야 합니다.
+﻿  stdafx.cpp
+  GSEGame.cpp
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(40,75): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(40,50): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(44,75): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(44,50): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(48,75): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(48,50): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(55,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(55,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(58,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(58,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(61,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(61,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(70,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(70,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(73,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(73,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(76,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(76,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Renderer.cpp
+D:\NGP_Project\Client\SimpleGame\Renderer.cpp(63,34): warning C4267: '=': 'size_t'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  SimpleGame.cpp
+  Title.cpp
+  코드를 생성하고 있습니다...
+D:\NGP_Project\Client\SimpleGame\SimpleGame.cpp(238): error C4716: 'Ready_check': 값을 반환해야 합니다.
+D:\NGP_Project\Client\SimpleGame\SimpleGame.cpp(259): error C4716: 'RecvClient': 값을 반환해야 합니다.
+D:\NGP_Project\Client\SimpleGame\SimpleGame.cpp(247): error C4716: 'SendServer': 값을 반환해야 합니다.
