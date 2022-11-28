@@ -11,7 +11,6 @@ HANDLE TThread;
 // 연결된 소켓 저장
 std::vector<SOCKET> MatchingQueue;
 
-
 /////////////////////////////////////////////////////////////////
 // 오류 출력 부분
 /////////////////////////////////////////////////////////////////
@@ -129,6 +128,61 @@ DWORD WINAPI TitleThread(LPVOID arg)
         //////////////////////////////////////////////////////////////// 
 
     }
+}
+
+DWORD WINAPI ProcessThread(LPVOID arg)
+{
+    printf("Running ProcessThread\n");
+
+    SOCKET client_sock = (SOCKET)arg;
+    SOCKADDR_IN clientaddr;
+
+    int retval;
+    Point Pos{ 0 };
+    Point Bomb = Pos;
+    KeyInput Input{ 0 };
+    int addrlen;
+
+    // 클라이언트 정보 얻기
+    addrlen = sizeof(clientaddr);
+    getpeername(client_sock, (SOCKADDR*)&clientaddr, &addrlen);
+
+    // 클라이언트와 데이터 통신
+    while (1) {
+
+        retval = WaitForSingleObject(Event, INFINITE);
+
+        // 데이터 받기 (recv())
+        retval = recv(client_sock, (char*)&Input, sizeof(KeyInput), 0);    // char : 1byte
+        if (retval == SOCKET_ERROR) {
+            err_display("recv()");
+            break;
+        }
+        else if (retval == 0)
+            break;
+
+        gameData.SetKeyInput(client_sock, Input);
+
+        // 데이터 보내기 (send())
+
+        MapData md[MAP_SIZE][MAP_SIZE];
+
+        for (int i = 0; i < MAP_SIZE; i++)
+            for (int j = 0; j < MAP_SIZE; j++)
+                md[i][j] = gameData.GetMapData(i, j);
+        retval = send(client_sock, (char*)&md, sizeof(md), 0);
+        if (retval == SOCKET_ERROR)
+        {
+            err_display("XY send()");
+            break;
+        }
+        SetEvent(Event);
+    }
+
+    // 윈속 종료
+    WSACleanup();
+
+    return 0;
 }
 
 
