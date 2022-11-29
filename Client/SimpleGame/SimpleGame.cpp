@@ -161,7 +161,6 @@ int ConnetCheck()
 	{
 		err_display("");
 	}
-	g_title->RendererScene();
 }
 
 int SendServer(void)
@@ -184,7 +183,7 @@ int RecvClient(void)
 	g_game->RendererGameScene();
 }
 
-int RecvData(SOCKET s, char* buf, int len, int flags)
+/*int RecvData(SOCKET s, char* buf, int len, int flags)
 {
 	int data;
 	char* ptr = buf;
@@ -201,7 +200,7 @@ int RecvData(SOCKET s, char* buf, int len, int flags)
 	}
 
 	return (len - left);
-}
+}*/
 
 void RenderScene(int temp)
 {
@@ -217,6 +216,7 @@ void RenderScene(int temp)
 	}
 	else
 	{
+		ConnetCheck();
 		g_title->RendererScene();
 	}
 	g_game->SetMapData(mapData);
