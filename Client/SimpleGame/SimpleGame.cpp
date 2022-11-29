@@ -33,7 +33,7 @@ SOCKADDR_IN serveraddr;
 char buf[BUFSIZE + 1];
 int retval;
 int RecvData(SOCKET s, char* buf, int len, int flags);
-int gamestate = 0;
+bool gamestate = false;
 
 int g_prevTimeInMillisecond = 0;
 int px = 15; int py = 15;
@@ -210,7 +210,7 @@ void RenderScene(int temp)
 	g_prevTimeInMillisecond = currentTime;
 	float elapsedTimeInSec = (float)elapsedTime; // 1000.0f;
 
-	if (gamestate == 1)
+	if (gamestate == true)
 	{
 		SendServer();
 		RecvClient();
@@ -218,10 +218,7 @@ void RenderScene(int temp)
 	else
 	{
 		g_title->RendererScene();
-
-
 	}
-
 	g_game->SetMapData(mapData);
 	g_game->RendererGameScene();
 
@@ -268,7 +265,6 @@ int main(int argc, char** argv)
 	if (retval == SOCKET_ERROR)
 	{
 		err_quit("");
-		gamestate = 1;
 	}
 
 	g_game = new GSEGame();
