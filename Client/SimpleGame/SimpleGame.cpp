@@ -30,8 +30,10 @@ Title* g_title = NULL;
 WSADATA wsa;
 SOCKET sock;
 SOCKADDR_IN serveraddr;
+char buf[BUFSIZE + 1];
 int retval;
-
+int RecvData(SOCKET s, char* buf, int len, int flags);
+int gamestate = 0;
 
 int g_prevTimeInMillisecond = 0;
 int px = 15; int py = 15;
@@ -43,66 +45,6 @@ int bombtime[BOMB_MAX] = { 0 };
 
 MapData mapData[MAP_SIZE][MAP_SIZE];
 
-void RenderScene(int temp)
-{
-	int currentTime = glutGet(GLUT_ELAPSED_TIME);
-	int elapsedTime = currentTime - g_prevTimeInMillisecond;
-	g_prevTimeInMillisecond = currentTime;
-	float elapsedTimeInSec = (float)elapsedTime; // 1000.0f;
-
-
-	for (int i = 0; i < MAP_SIZE; i++)		//세로
-	{
-		for (int j = 0; j < MAP_SIZE; j++)	//가로
-		{
-			mapData[i][j].isBomb = false;
-			mapData[i][j].isBombFrame = false;
-			if (i == 0 || i == MAP_SIZE - 1 || j == 0 || j == MAP_SIZE - 1)
-				mapData[i][j].isRock = true;
-			else if (i % 3 == 2 && j % 3 == 2)
-				mapData[i][j].isRock = true;
-			else
-				mapData[i][j].isRock = false;
-
-			if ((mapData[i][j].isRock == false) && (i % 6 == 2 && j % 5 == 1)) //아이템두기
-				mapData[i][j].item = Item::EMPTY;
-			else if ((mapData[i][j].isRock == false) && (i % 8 == 3 && j % 6 == 3))
-				mapData[i][j].item = Item::EMPTY;
-			else
-				mapData[i][j].item = Item::EMPTY;
-			mapData[i][j].playerColor = PlayerColor::PLAYEREMPTY;
-		}
-	}
-
-	mapData[px][py].playerColor = PlayerColor::RED;
-
-	for (int i = 0; i < BOMB_MAX; i++)
-	{
-		if (bx[i] >= 0 && by[i] >= 0)
-		{
-			mapData[bx[i]][by[i]].isBomb = true;
-			bombtime[i]++;
-
-			if (bombtime[i] == BOMB_TIME)
-			{
-				bombtime[i] = 0;
-
-				mapData[bx[i]][by[i]].isBomb = false;
-
-				bx[i] = -1;
-				by[i] = -1;
-			}
-		}
-	}
-
-
-	g_game->SetMapData(mapData);
-	g_game->RendererGameScene();
-
-	glutSwapBuffers();		//double buffering
-
-	glutTimerFunc(60, RenderScene, 60);
-}
 
 bool collision(void)
 {
@@ -212,24 +154,9 @@ void err_display(char* msg)
 {
 }
 
-/*int ConnectServer(void)
+int ConnetCheck()
 {
-	// 소켓 생성
-	sock = socket(AF_INET, SOCK_STREAM, 0);
-	if (sock == INVALID_SOCKET) err_quit("");
-
-	// 서버 연결()
-	ZeroMemory(&serveraddr, sizeof(serveraddr));
-	serveraddr.sin_family = AF_INET;
-	inet_pton(AF_INET, SERVERIP, &(serveraddr.sin_addr.s_addr));
-	serveraddr.sin_port = htons(SERVERPORT);
-	retval = connect(sock, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
-	if (retval == SOCKET_ERROR) err_quit("");
-}*/
-
-int ReadyCheck()
-{
-	//
+	retval = recv(sock, (char*)(&mapData), sizeof(mapData), 0);
 	if (retval == SOCKET_ERROR) 
 	{
 		err_display("");
@@ -257,6 +184,52 @@ int RecvClient(void)
 	g_game->RendererGameScene();
 }
 
+int RecvData(SOCKET s, char* buf, int len, int flags)
+{
+	int data;
+	char* ptr = buf;
+	int left = len;
+
+	while (left > 0) {
+		data = recv(s, ptr, left, flags);
+		if (data == SOCKET_ERROR)
+			return SOCKET_ERROR;
+		else if (data == 0)
+			break;
+		left -= data;
+		ptr += data;
+	}
+
+	return (len - left);
+}
+
+void RenderScene(int temp)
+{
+	int currentTime = glutGet(GLUT_ELAPSED_TIME);
+	int elapsedTime = currentTime - g_prevTimeInMillisecond;
+	g_prevTimeInMillisecond = currentTime;
+	float elapsedTimeInSec = (float)elapsedTime; // 1000.0f;
+
+	if (gamestate == 1)
+	{
+		SendServer();
+		RecvClient();
+	}
+	else
+	{
+		g_title->RendererScene();
+
+
+	}
+
+	g_game->SetMapData(mapData);
+	g_game->RendererGameScene();
+
+	glutSwapBuffers();		//double buffering
+
+	glutTimerFunc(60, RenderScene, 60);
+}
+
 int main(int argc, char** argv)
 {
 	// Initialize GL things
@@ -282,7 +255,6 @@ int main(int argc, char** argv)
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		return 1;
 	//소켓 생성, 서버 연결
-	//ConnectServer();
 	// 소켓 생성
 	sock = socket(AF_INET, SOCK_STREAM, 0);
 	if (sock == INVALID_SOCKET) err_quit("");
@@ -293,8 +265,11 @@ int main(int argc, char** argv)
 	inet_pton(AF_INET, SERVERIP, &(serveraddr.sin_addr.s_addr));
 	serveraddr.sin_port = htons(SERVERPORT);
 	retval = connect(sock, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
-	if (retval == SOCKET_ERROR) err_quit("");
-	//
+	if (retval == SOCKET_ERROR)
+	{
+		err_quit("");
+		gamestate = 1;
+	}
 
 	g_game = new GSEGame();
 	g_title = new Title();
@@ -310,7 +285,7 @@ int main(int argc, char** argv)
 
 	g_prevTimeInMillisecond = glutGet(GLUT_ELAPSED_TIME);
 
-	glutTimerFunc(16, RenderScene, 16);
+	glutTimerFunc(50, RenderScene, 50);
 
 	glutMainLoop();
 
