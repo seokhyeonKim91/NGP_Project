@@ -1,7 +1,7 @@
 #pragma comment(lib, "ws2_32")
 #include "stdafx.h"
 #include "ServerScene.h"
-bool startGame = false;
+bool GameState = false;
 
 //SceneData 만들기!
 ServerData gameData;
@@ -72,8 +72,7 @@ DWORD WINAPI TitleThread(LPVOID arg)
     if (retval == SOCKET_ERROR) err_quit("listen()");
 
     //초기 시작은 모든 플레이어가 준비 안된 상태이므로 false
-    //또, 아무 키도 입력 받아선 안된다.
-    bool playerReady = false;
+    //또, 아무 키도 입력 받아선 안된다.   
     KeyInput Input{ 0 };
 
     // 데이터 통신에 사용할 변수
@@ -108,7 +107,7 @@ DWORD WINAPI TitleThread(LPVOID arg)
         {
             startGame = true;
 
-            for (int i = 0; i < 3; ++i)
+            for (int i = 0; i < MAX_PLAYER; ++i)
             {
                 retval = send(MatchingQueue[i], (char*)&startGame, sizeof(startGame), 0);
 
