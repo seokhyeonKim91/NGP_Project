@@ -154,14 +154,6 @@ void err_display(char* msg)
 {
 }
 
-int ConnetCheck()
-{
-	retval = recv(sock, (char*)(&mapData), sizeof(mapData), 0);
-	if (retval == SOCKET_ERROR) 
-	{
-		err_display("");
-	}
-}
 
 int SendServer(void)
 {
@@ -183,23 +175,17 @@ int RecvClient(void)
 	g_game->RendererGameScene();
 }
 
-/*int RecvData(SOCKET s, char* buf, int len, int flags)
+/*int RecvnData(SOCKET s, char* buf, int len, int flags)
 {
 	int data;
 	char* ptr = buf;
 	int left = len;
 
-	while (left > 0) {
-		data = recv(s, ptr, left, flags);
-		if (data == SOCKET_ERROR)
-			return SOCKET_ERROR;
-		else if (data == 0)
-			break;
-		left -= data;
-		ptr += data;
+	while (left > 0) 
+	{
 	}
 
-	return (len - left);
+	return ();
 }*/
 
 void RenderScene(int temp)
@@ -216,7 +202,7 @@ void RenderScene(int temp)
 	}
 	else
 	{
-		ConnetCheck();
+		RecvClient();
 		g_title->RendererScene();
 	}
 	g_game->SetMapData(mapData);
