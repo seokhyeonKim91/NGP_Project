@@ -152,9 +152,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="GSEGame.h" />
     <ClInclude Include="GSEGlobals.h" />
     <ClInclude Include="Renderer.h" />
