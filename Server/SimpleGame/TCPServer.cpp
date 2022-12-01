@@ -6,8 +6,9 @@ bool GameState = false;
 //SceneData 만들기!
 ServerData gameData;
 HANDLE Event;
-HANDLE TThread;
+HANDLE TThread, GThread, PThread;
 
+DWORD WINAPI ProcessThread(LPVOID arg);
 // 연결된 소켓 저장
 std::vector<SOCKET> MatchingQueue;
 
@@ -41,8 +42,6 @@ void err_display(char* msg)
     LocalFree(lpMsgBuf);
 }
 ////////////////////////////////////////////////////////////////////
-
-
 
 // 타이틀 쓰레드 구현
 DWORD WINAPI TitleThread(LPVOID arg)
@@ -88,7 +87,7 @@ DWORD WINAPI TitleThread(LPVOID arg)
         if (client_sock == INVALID_SOCKET) {
             err_display("accept()");
             break;
-        }
+        }       
 
         MatchingQueue.push_back(client_sock);
 
@@ -111,8 +110,8 @@ DWORD WINAPI TitleThread(LPVOID arg)
             {
                 retval = send(MatchingQueue[i], (char*)&GameState, sizeof(GameState), 0);
 
-                TThread = CreateThread(NULL, 0, TitleThread, (LPVOID)MatchingQueue[i], 0, NULL);
-                if (TThread == NULL) { closesocket(client_sock); }
+                PThread = CreateThread(NULL, 0, ProcessThread, (LPVOID)MatchingQueue[i], 0, NULL);
+                if (PThread == NULL) { closesocket(client_sock); }
             }          
 
             ExitThread(0);
@@ -178,21 +177,36 @@ DWORD WINAPI ProcessThread(LPVOID arg)
         SetEvent(Event);
     }
 
+    printf("[TCP 서버] 클라이언트 종료: IP 주소=%s, 포트 번호=%d\n", clientaddr.sin_addr, ntohs(clientaddr.sin_port));
+
     // 윈속 종료
     WSACleanup();
 
     return 0;
 }
 
+DWORD WINAPI GameThread(LPVOID arg)
+{
+    while (true)
+    {
+        gameData.Update();
+    }
+    return 0;
+}
 
 int main(int argc, char* argv[])
 {
     Event = CreateEvent(NULL, FALSE, TRUE, NULL);
     if (Event == NULL) return 1;
 
+    GThread = CreateThread(NULL, 0, GameThread, NULL, 0, NULL);
+    if (GThread == NULL)
+        printf("Create TThread Error\n");
+
     TThread = CreateThread(NULL, 0, TitleThread, NULL, 0, NULL);
     if (TThread == NULL)
         printf("Create TThread Error\n");
+
 
     while (1)
     {
