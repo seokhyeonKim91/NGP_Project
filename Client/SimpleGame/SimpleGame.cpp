@@ -32,7 +32,7 @@ SOCKET sock;
 SOCKADDR_IN serveraddr;
 char buf[BUFSIZE + 1];
 int retval;
-bool gamestate = false;
+bool GameState = false;
 
 int g_prevTimeInMillisecond = 0;
 int px = 15; int py = 15;
@@ -181,7 +181,7 @@ void RenderScene(int temp)
 	g_prevTimeInMillisecond = currentTime;
 	float elapsedTimeInSec = (float)elapsedTime; // 1000.0f;
 
-	if (gamestate == true)
+	if (GameState == true)
 	{
 		SendServer();
 		RecvClient();
