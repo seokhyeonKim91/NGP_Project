@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "GSEGame.h"
+#include "Title.h"
 
 GSEGame::GSEGame()
 {
