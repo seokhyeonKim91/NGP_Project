@@ -114,6 +114,8 @@ DWORD WINAPI TitleThread(LPVOID arg)
                 if (PThread == NULL) { closesocket(client_sock); }
             }          
 
+            printf("Exit Title Thread()\n");
+
             ExitThread(0);
         }
         else
@@ -199,13 +201,14 @@ int main(int argc, char* argv[])
     Event = CreateEvent(NULL, FALSE, TRUE, NULL);
     if (Event == NULL) return 1;
 
+    TThread = CreateThread(NULL, 0, TitleThread, NULL, 0, NULL);
+    if (TThread == NULL)
+        printf("Create TThread Error\n");
+
     GThread = CreateThread(NULL, 0, GameThread, NULL, 0, NULL);
     if (GThread == NULL)
         printf("Create TThread Error\n");
 
-    TThread = CreateThread(NULL, 0, TitleThread, NULL, 0, NULL);
-    if (TThread == NULL)
-        printf("Create TThread Error\n");
 
 
     while (1)

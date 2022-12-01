@@ -204,6 +204,7 @@ void ServerData::Update()
 			}
 		}
 	}
+
 	for (int i = 0; i < MAX_PLAYER; i++)
 	{
 		if (m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].isBombFrame)

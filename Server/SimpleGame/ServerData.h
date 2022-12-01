@@ -9,7 +9,7 @@
 #include <chrono>
 #include <queue>
 
-#define MAX_PLAYER 2
+#define MAX_PLAYER 1
 #define MAP_SIZE 30
 #define SERVERPORT 9000
 
