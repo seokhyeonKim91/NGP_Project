@@ -1,28 +1,11 @@
-﻿  stdafx.cpp
-  GSEGame.cpp
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(40,75): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(40,50): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(44,75): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(44,50): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(48,75): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(48,50): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(55,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(55,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(58,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(58,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(61,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(61,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(70,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(70,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(73,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(73,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(76,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\NGP_Project\Client\SimpleGame\GSEGame.cpp(76,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Renderer.cpp
-D:\NGP_Project\Client\SimpleGame\Renderer.cpp(63,34): warning C4267: '=': 'size_t'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  SimpleGame.cpp
-  Title.cpp
-  코드를 생성하고 있습니다...
-D:\NGP_Project\Client\SimpleGame\SimpleGame.cpp(238): error C4716: 'Ready_check': 값을 반환해야 합니다.
-D:\NGP_Project\Client\SimpleGame\SimpleGame.cpp(259): error C4716: 'RecvClient': 값을 반환해야 합니다.
-D:\NGP_Project\Client\SimpleGame\SimpleGame.cpp(247): error C4716: 'SendServer': 값을 반환해야 합니다.
+﻿  SimpleGame.cpp
+SimpleGame.obj : error LNK2019: __imp_closesocket 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+SimpleGame.obj : error LNK2019: __imp_connect 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+SimpleGame.obj : error LNK2019: __imp_htons 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+SimpleGame.obj : error LNK2019: __imp_recv 외부 기호(참조 위치: "void __cdecl RecvClient(void)" (?RecvClient@@YAXXZ) 함수)에서 확인하지 못했습니다.
+SimpleGame.obj : error LNK2019: __imp_send 외부 기호(참조 위치: "void __cdecl SendServer(void)" (?SendServer@@YAXXZ) 함수)에서 확인하지 못했습니다.
+SimpleGame.obj : error LNK2019: __imp_socket 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+SimpleGame.obj : error LNK2019: __imp_WSAStartup 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+SimpleGame.obj : error LNK2019: __imp_WSACleanup 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+SimpleGame.obj : error LNK2019: __imp_inet_pton 외부 기호(참조 위치: main 함수)에서 확인하지 못했습니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\x64\Debug\SimpleGame.exe : fatal error LNK1120: 9개의 확인할 수 없는 외부 참조입니다.

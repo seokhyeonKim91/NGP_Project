@@ -155,7 +155,7 @@ void err_display(char* msg)
 }
 
 
-int SendServer(void)
+void SendServer(void)
 {
 	retval = send(sock, (const char*)(&g_inputs), sizeof(g_inputs), 0);
 	if (retval == SOCKET_ERROR) 
@@ -164,7 +164,7 @@ int SendServer(void)
 	}
 }
 
-int RecvClient(void)
+void RecvClient(void)
 {
 	retval = recv(sock, (char*)(&mapData), sizeof(mapData), 0);
 	if (retval == SOCKET_ERROR) 
