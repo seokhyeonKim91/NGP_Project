@@ -1,29 +1,36 @@
-﻿  stdafx.cpp
-  GSEGame.cpp
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(40,75): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(40,50): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(44,75): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(44,50): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(48,75): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(48,50): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(55,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(55,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(58,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(58,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(61,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(61,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(70,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(70,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(73,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(73,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(76,76): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\GSEGame.cpp(76,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  GSEObject.cpp
-  Renderer.cpp
-C:\Users\tlseh\OneDrive\Desktop\Project\SimpleGame\Renderer.cpp(63,34): warning C4267: '=': 'size_t'에서 'GLint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  SimpleGame.cpp
-  코드를 생성하고 있습니다.
-  Previous IPDB not found, fall back to full compilation.
-  All 186 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  코드를 생성했습니다.
-  SimpleGame.vcxproj -> C:\Users\tlseh\OneDrive\Desktop\Project\x64\Release\SimpleGame.exe
+﻿  SimpleGame.cpp
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(27,8): error C2143: 구문 오류: ';'이(가) '*' 앞에 없습니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(27,8): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(27,19): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(28,18): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(28,10): error C2146: 구문 오류: ';'이(가) 'g_inputs' 식별자 앞에 없습니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(41,8): error C2065: 'BOMB_MAX': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(41,35): error C2065: 'BOMB_MAX': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(44,14): error C2065: 'BOMB_MAX': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(46,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(46,9): error C2146: 구문 오류: ';'이(가) 'mapData' 식별자 앞에 없습니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(51,6): error C2065: 'mapData': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(61,2): error C2065: 'mapData': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(78,3): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(93,3): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(103,3): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(109,3): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(115,3): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(121,3): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(135,3): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(138,3): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(141,3): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(144,3): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(160,37): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(160,55): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(169,31): error C2065: 'mapData': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(169,48): error C2065: 'mapData': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(174,21): error C2065: 'mapData': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(208,21): error C2065: 'mapData': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(222,21): error C2065: 'GSE_WINDOW_WIDTH': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(222,39): error C2065: 'GSE_WINDOW_HEIGHT': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(256,15): error C2061: 구문 오류: 식별자 'GSEGame'
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(258,10): error C2065: 'g_inputs': 선언되지 않은 식별자입니다.
+  Title.cpp
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\Title.cpp(6,28): error C2065: 'GSE_WINDOW_WIDTH': 선언되지 않은 식별자입니다.
+C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\Title.cpp(6,46): error C2065: 'GSE_WINDOW_HEIGHT': 선언되지 않은 식별자입니다.

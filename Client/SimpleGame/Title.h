@@ -1,6 +1,6 @@
 #pragma once
 #include "Renderer.h"
-#include "GSEGame.h"
+
 
 class Title
 {

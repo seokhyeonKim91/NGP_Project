@@ -105,11 +105,11 @@ DWORD WINAPI TitleThread(LPVOID arg)
         ////////////////////////////////////////////////////////////////
         if (MatchingQueue.size() == MAX_PLAYER)
         {
-            startGame = true;
+            GameState = true;
 
             for (int i = 0; i < MAX_PLAYER; ++i)
             {
-                retval = send(MatchingQueue[i], (char*)&startGame, sizeof(startGame), 0);
+                retval = send(MatchingQueue[i], (char*)&GameState, sizeof(GameState), 0);
 
                 TThread = CreateThread(NULL, 0, TitleThread, (LPVOID)MatchingQueue[i], 0, NULL);
                 if (TThread == NULL) { closesocket(client_sock); }
@@ -121,7 +121,7 @@ DWORD WINAPI TitleThread(LPVOID arg)
         {
             for (int i = 0; i < MatchingQueue.size(); ++i)
             {
-                retval = send(MatchingQueue[i], (char*)&startGame, sizeof(startGame), 0);
+                retval = send(MatchingQueue[i], (char*)&GameState, sizeof(GameState), 0);
             }
         }
         //////////////////////////////////////////////////////////////// 

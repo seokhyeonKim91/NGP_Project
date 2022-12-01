@@ -20,7 +20,7 @@ but WITHOUT ANY WARRANTY.
 
 #include "Title.h"
 
-#define SERVERIP "172.30.1.11"
+#define SERVERIP "10.30.2.254"
 #define SERVERPORT 9000
 #define BUFSIZE    512
 
