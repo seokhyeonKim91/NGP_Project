@@ -175,19 +175,6 @@ void RecvClient(void)
 	g_game->RendererGameScene();
 }
 
-/*int RecvnData(SOCKET s, char* buf, int len, int flags)
-{
-	int data;
-	char* ptr = buf;
-	int left = len;
-
-	while (left > 0) 
-	{
-	}
-
-	return ();
-}*/
-
 void RenderScene(int temp)
 {
 	int currentTime = glutGet(GLUT_ELAPSED_TIME);
@@ -234,15 +221,12 @@ int main(int argc, char** argv)
 		std::cout << "GLEW 3.0 not supported\n ";
 	}
 
-	//윈속 초기화
+	// 서버 연결()
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		return 1;
-	//소켓 생성, 서버 연결
-	// 소켓 생성
 	sock = socket(AF_INET, SOCK_STREAM, 0);
 	if (sock == INVALID_SOCKET) err_quit("");
 
-	// 서버 연결()
 	ZeroMemory(&serveraddr, sizeof(serveraddr));
 	serveraddr.sin_family = AF_INET;
 	inet_pton(AF_INET, SERVERIP, &(serveraddr.sin_addr.s_addr));
