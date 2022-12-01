@@ -32,7 +32,6 @@ SOCKET sock;
 SOCKADDR_IN serveraddr;
 char buf[BUFSIZE + 1];
 int retval;
-int RecvData(SOCKET s, char* buf, int len, int flags);
 bool gamestate = false;
 
 int g_prevTimeInMillisecond = 0;
