@@ -20,7 +20,7 @@ but WITHOUT ANY WARRANTY.
 
 #include "Title.h"
 
-#define SERVERIP "10.30.2.24"
+#define SERVERIP "172.30.1.11"
 #define SERVERPORT 9000
 #define BUFSIZE    512
 
@@ -32,7 +32,7 @@ SOCKET sock;
 SOCKADDR_IN serveraddr;
 char buf[BUFSIZE + 1];
 int retval;
-bool GameState = false;
+bool GameState = true;
 
 int g_prevTimeInMillisecond = 0;
 int px = 15; int py = 15;
@@ -153,6 +153,25 @@ void err_display(char* msg)
 {
 }
 
+int recvdata(SOCKET s, char* buf, int len, int flags)
+{
+	int received;
+	char* ptr = buf;
+	int left = len;
+
+	while (left > 0) {
+		received = recv(s, ptr, left, flags);
+		if (received == SOCKET_ERROR)
+			return SOCKET_ERROR;
+		else if (received == 0)
+			break;
+		left -= received;
+		ptr += received;
+	}
+
+	return (len - left);
+}
+
 
 void SendServer(void)
 {
@@ -165,7 +184,7 @@ void SendServer(void)
 
 void RecvClient(void)
 {
-	retval = recv(sock, (char*)(&mapData), sizeof(mapData), 0);
+	retval = recvdata(sock, (char*)(&mapData), sizeof(mapData), 0);
 	if (retval == SOCKET_ERROR) 
 	{
 		err_display("");
@@ -183,6 +202,7 @@ void RenderScene(int temp)
 
 	if (GameState == true)
 	{
+		MapData mapData[MAP_SIZE][MAP_SIZE];
 		SendServer();
 		RecvClient();
 	}
@@ -198,6 +218,7 @@ void RenderScene(int temp)
 
 	glutTimerFunc(60, RenderScene, 60);
 }
+
 
 int main(int argc, char** argv)
 {
