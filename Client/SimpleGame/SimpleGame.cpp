@@ -275,7 +275,7 @@ int main(int argc, char** argv)
 
 	g_prevTimeInMillisecond = glutGet(GLUT_ELAPSED_TIME);
 
-	glutTimerFunc(50, RenderScene, 1);
+	glutTimerFunc(100, RenderScene, 1);
 
 	glutMainLoop();
 
