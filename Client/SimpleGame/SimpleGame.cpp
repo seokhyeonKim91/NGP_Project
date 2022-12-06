@@ -32,12 +32,13 @@ SOCKET sock;
 SOCKADDR_IN serveraddr;
 char buf[BUFSIZE + 1];
 int retval;
-bool GameState = true;
+bool GameState = false;
 
 int g_prevTimeInMillisecond = 0;
 int px = 15; int py = 15;
 
-int bx[BOMB_MAX] = { -1 }; int by[BOMB_MAX] = { -1 };
+int bx[BOMB_MAX] = { -1 }; 
+int by[BOMB_MAX] = { -1 };
 int bombnum = 0;
 int bombcount = 1;
 int bombtime[BOMB_MAX] = { 0 };
@@ -51,7 +52,6 @@ bool collision(void)
 	{
 		return true;
 	}
-
 	return false;
 }
 
@@ -153,25 +153,41 @@ void err_display(char* msg)
 {
 }
 
-int recvdata(SOCKET s, char* buf, int len, int flags)
+int recvn(SOCKET s, char* buf, int len, int flags) //서버에서 받은 데이터 처리
 {
-	int received;
-	char* ptr = buf;
-	int left = len;
+	int data; // 내부적으로 호출하는 recv() 함수의 리턴 값을 저장하는 변수
+	char* ptr = buf; // 포인터 변수 ptr은 응용 프로그램의 버퍼의 시작 주소
+	int left = len; // left 변수는 아직 읽지 않은 데이터 크기
 
-	while (left > 0) {
-		received = recv(s, ptr, left, flags);
-		if (received == SOCKET_ERROR)
+	while (left > 0) 
+	{
+		data = recv(s, ptr, left, flags);
+		if (data == SOCKET_ERROR)
 			return SOCKET_ERROR;
-		else if (received == 0)
-			break;
-		left -= received;
-		ptr += received;
+		
+		left -= data;
+		ptr += data;
 	}
-
-	return (len - left);
+	return (len - left); // 버퍼에 복사한 바이트 수를 리턴
 }
 
+void ConnectServer(void)
+{
+	// 서버 연결()
+	sock = socket(AF_INET, SOCK_STREAM, 0);
+	if (sock == INVALID_SOCKET) err_quit("");
+
+	ZeroMemory(&serveraddr, sizeof(serveraddr));
+	serveraddr.sin_family = AF_INET;
+	inet_pton(AF_INET, SERVERIP, &(serveraddr.sin_addr.s_addr));
+	serveraddr.sin_port = htons(SERVERPORT);
+	retval = connect(sock, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
+	if (retval == SOCKET_ERROR)
+	{
+		err_quit("");
+	}
+	GameState = true;
+}
 
 void SendServer(void)
 {
@@ -184,7 +200,7 @@ void SendServer(void)
 
 void RecvClient(void)
 {
-	retval = recvdata(sock, (char*)(&mapData), sizeof(mapData), 0);
+	retval = recvn(sock, (char*)(&mapData), sizeof(mapData), 0);
 	if (retval == SOCKET_ERROR) 
 	{
 		err_display("");
@@ -216,7 +232,7 @@ void RenderScene(int temp)
 
 	glutSwapBuffers();		//double buffering
 
-	glutTimerFunc(60, RenderScene, 60);
+	glutTimerFunc(50, RenderScene, 1);
 }
 
 
@@ -241,21 +257,9 @@ int main(int argc, char** argv)
 		std::cout << "GLEW 3.0 not supported\n ";
 	}
 
-	// 서버 연결()
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		return 1;
-	sock = socket(AF_INET, SOCK_STREAM, 0);
-	if (sock == INVALID_SOCKET) err_quit("");
-
-	ZeroMemory(&serveraddr, sizeof(serveraddr));
-	serveraddr.sin_family = AF_INET;
-	inet_pton(AF_INET, SERVERIP, &(serveraddr.sin_addr.s_addr));
-	serveraddr.sin_port = htons(SERVERPORT);
-	retval = connect(sock, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
-	if (retval == SOCKET_ERROR)
-	{
-		err_quit("");
-	}
+	ConnectServer();
 
 	g_game = new GSEGame();
 	g_title = new Title();
@@ -271,7 +275,7 @@ int main(int argc, char** argv)
 
 	g_prevTimeInMillisecond = glutGet(GLUT_ELAPSED_TIME);
 
-	glutTimerFunc(50, RenderScene, 50);
+	glutTimerFunc(50, RenderScene, 1);
 
 	glutMainLoop();
 
