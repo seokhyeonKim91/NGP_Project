@@ -101,16 +101,19 @@ DWORD WINAPI TitleThread(LPVOID arg)
         // 연결되었으므로 서버 상에서 플레이어를 만들어줘야한다.
         gameData.CreatePlayer(client_sock);
 
+
         ////////////////////////////////////////////////////////////////
         if (MatchingQueue.size() == MAX_PLAYER)
         {
             GameState = true;
+            //printf("매칭 큐 사이즈: %d\n", MatchingQueue.size());
 
             for (int i = 0; i < MAX_PLAYER; ++i)
             {
+
                 retval = send(MatchingQueue[i], (char*)&GameState, sizeof(GameState), 0);
 
-                PThread = CreateThread(NULL, 0, ProcessThread, (LPVOID)MatchingQueue[i], 0, NULL);
+                PThread = CreateThread(NULL, 0, ProcessThread, (LPVOID)MatchingQueue[i], 0, NULL);               
                 if (PThread == NULL) { closesocket(client_sock); }
             }          
 
@@ -159,7 +162,7 @@ DWORD WINAPI ProcessThread(LPVOID arg)
             break;
         }
         else if (retval == 0)
-            break;
+            break;        
 
         gameData.SetKeyInput(client_sock, Input);
 
@@ -170,12 +173,15 @@ DWORD WINAPI ProcessThread(LPVOID arg)
         for (int i = 0; i < MAP_SIZE; i++)
             for (int j = 0; j < MAP_SIZE; j++)
                 md[i][j] = gameData.GetMapData(i, j);
+
         retval = send(client_sock, (char*)&md, sizeof(md), 0);
+
         if (retval == SOCKET_ERROR)
         {
             err_display("XY send()");
             break;
         }
+       
         SetEvent(Event);
     }
 

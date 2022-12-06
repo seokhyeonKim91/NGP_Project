@@ -1,8 +1,1 @@
-﻿  SimpleGame.cpp
-C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\SimpleGame\SimpleGame.cpp(221,11): warning C4101: 'mapData' :참조되지 않은 지역 변수입니다.
-  코드를 생성하고 있습니다.
-  1 of 193 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  코드를 생성했습니다.
-  SimpleGame.vcxproj -> C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\x64\Release\SimpleGame.exe
+﻿  SimpleGame.vcxproj -> C:\Users\Administrator\Documents\GitHub\NGP_Project\Client\x64\Release\SimpleGame.exe

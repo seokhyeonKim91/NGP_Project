@@ -58,8 +58,7 @@ enum Item
 enum PlayerColor
 {
 	RED,
-	GREEN,
-	BLUE,
+	BLUE,	
 	PLAYEREMPTY,
 };
 

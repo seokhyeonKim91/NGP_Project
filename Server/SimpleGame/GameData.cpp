@@ -36,7 +36,7 @@ void ServerData::Update()
 {
 	///////////////////////
 	for (int i = 0; i < MAX_PLAYER; i++) //변경해야함
-	{
+	{		
 		if (m_players[i].isAlive)
 		{
 			m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].playerColor = PlayerColor::PLAYEREMPTY;
@@ -236,5 +236,6 @@ void ServerData::CreatePlayer(SOCKET socket)
 	m_players[m_nPlayer].playerBombCount = 1;
 	m_players[m_nPlayer].playerBombLength = 1;
 	m_players[m_nPlayer].playerColor = PlayerColor(m_nPlayer);
+
 	++m_nPlayer;
 }
