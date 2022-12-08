@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "ServerScene.h"
 
+int X1 = 1, Y1 = 1;
+int X2 = 10, Y2 = 1;
+
 // ∏  √ ±‚»≠
 ServerData::ServerData()
 {
@@ -232,7 +235,19 @@ void ServerData::CreatePlayer(SOCKET socket)
 {
 	m_players[m_nPlayer].playerSocket = socket;
 	m_players[m_nPlayer].isAlive = true;
-	m_players[m_nPlayer].playerPosition = { (m_nPlayer * 6) + 1, (m_nPlayer * 6) + 1 };
+
+	if (m_nPlayer == 0)
+	{
+		m_players[0].playerPosition.X = X1;
+		m_players[0].playerPosition.Y = Y1;
+	}
+
+	else
+	{
+		m_players[1].playerPosition.X = X2;
+		m_players[1].playerPosition.Y = Y2;
+	}
+
 	m_players[m_nPlayer].playerBombCount = 1;
 	m_players[m_nPlayer].playerBombLength = 1;
 	m_players[m_nPlayer].playerColor = PlayerColor(m_nPlayer);

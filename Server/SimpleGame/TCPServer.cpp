@@ -8,7 +8,8 @@ ServerData gameData;
 HANDLE Event;
 HANDLE TThread, GThread, PThread;
 
-DWORD WINAPI ProcessThread(LPVOID arg);
+DWORD WINAPI ProcessThread1(LPVOID arg);
+DWORD WINAPI ProcessThread2(LPVOID arg);
 // 연결된 소켓 저장
 std::vector<SOCKET> MatchingQueue;
 
@@ -98,8 +99,7 @@ DWORD WINAPI TitleThread(LPVOID arg)
         printf("\n[TCP 서버] 클라이언트 접속: IP 주소=%s, 포트 번호=%d\n",
             ip_addr, ntohs(clientaddr.sin_port));
 
-        // 연결되었으므로 서버 상에서 플레이어를 만들어줘야한다.
-        gameData.CreatePlayer(client_sock);
+        // 연결되었으므로 서버 상에서 플레이어를 만들어줘야한다.      
 
 
         ////////////////////////////////////////////////////////////////
@@ -108,14 +108,15 @@ DWORD WINAPI TitleThread(LPVOID arg)
             GameState = true;
             //printf("매칭 큐 사이즈: %d\n", MatchingQueue.size());
 
-            for (int i = 0; i < MAX_PLAYER; ++i)
-            {
+            gameData.CreatePlayer(MatchingQueue[0]);
+            retval = send(MatchingQueue[0], (char*)&GameState, sizeof(GameState), 0);
+            PThread = CreateThread(NULL, 0, ProcessThread1, (LPVOID)MatchingQueue[0], 0, NULL);
+            if (PThread == NULL) { printf("Thread1 NULL"); closesocket(MatchingQueue[0]); }
 
-                retval = send(MatchingQueue[i], (char*)&GameState, sizeof(GameState), 0);
-
-                PThread = CreateThread(NULL, 0, ProcessThread, (LPVOID)MatchingQueue[i], 0, NULL);               
-                if (PThread == NULL) { closesocket(client_sock); }
-            }          
+            gameData.CreatePlayer(MatchingQueue[1]);
+            retval = send(MatchingQueue[1], (char*)&GameState, sizeof(GameState), 0);
+            PThread = CreateThread(NULL, 0, ProcessThread2, (LPVOID)MatchingQueue[1], 0, NULL);
+            if (PThread == NULL) { printf("Thread2 NULL"); closesocket(MatchingQueue[1]); }
 
             printf("Exit Title Thread()\n");
 
@@ -133,12 +134,12 @@ DWORD WINAPI TitleThread(LPVOID arg)
     }
 }
 
-DWORD WINAPI ProcessThread(LPVOID arg)
+DWORD WINAPI ProcessThread1(LPVOID arg)
 {
-    printf("Running ProcessThread\n");
+    printf("Running ProcessThread1\n");
 
     SOCKET client_sock = (SOCKET)arg;
-    SOCKADDR_IN clientaddr;
+    SOCKADDR_IN clientaddr;    
 
     int retval;
     Point Pos{ 0 };
@@ -161,6 +162,67 @@ DWORD WINAPI ProcessThread(LPVOID arg)
             err_display("recv()");
             break;
         }
+
+        else if (retval == 0)
+            break;        
+
+        gameData.SetKeyInput(client_sock, Input);
+
+        // 데이터 보내기 (send())
+
+        MapData md[MAP_SIZE][MAP_SIZE];
+
+        for (int i = 0; i < MAP_SIZE; i++)
+            for (int j = 0; j < MAP_SIZE; j++)
+                md[i][j] = gameData.GetMapData(i, j);        
+
+        retval = send(client_sock, (char*)&md, sizeof(md), 0);
+
+        if (retval == SOCKET_ERROR)
+        {
+            err_display("XY send()");
+            break;
+        }
+       
+        SetEvent(Event);
+    }   
+
+    // 윈속 종료
+    WSACleanup();
+
+    return 0;
+}
+
+DWORD WINAPI ProcessThread2(LPVOID arg)
+{
+    printf("Running ProcessThread2\n");
+
+    SOCKET client_sock = (SOCKET)arg;
+    SOCKADDR_IN clientaddr;   
+
+    int retval;
+    Point Pos{ 0 };
+    Point Bomb = Pos;
+    KeyInput Input{ 0 };
+    int addrlen;
+
+    // 클라이언트 정보 얻기
+    addrlen = sizeof(clientaddr);
+    getpeername(client_sock, (SOCKADDR*)&clientaddr, &addrlen);
+
+
+    // 클라이언트와 데이터 통신
+    while (1) {
+
+        retval = WaitForSingleObject(Event, INFINITE);
+
+        // 데이터 받기 (recv())
+        retval = recv(client_sock, (char*)&Input, sizeof(KeyInput), 0);    // char : 1byte
+        if (retval == SOCKET_ERROR) {
+            err_display("recv()");
+            break;
+        }
+
         else if (retval == 0)
             break;        
 
@@ -181,11 +243,9 @@ DWORD WINAPI ProcessThread(LPVOID arg)
             err_display("XY send()");
             break;
         }
-       
+
         SetEvent(Event);
     }
-
-    printf("[TCP 서버] 클라이언트 종료: IP 주소=%s, 포트 번호=%d\n", clientaddr.sin_addr, ntohs(clientaddr.sin_port));
 
     // 윈속 종료
     WSACleanup();
