@@ -200,7 +200,7 @@ void SendServer(void)
 
 void RecvClient(void)
 {
-	retval = recvn(sock, reinterpret_cast<char*>(&mapData), sizeof(mapData), 0);
+	retval = recvn(sock, (char*)(&mapData), sizeof(mapData), 0);
 	if (retval == SOCKET_ERROR) 
 	{
 		err_display("mapdart recv error");
