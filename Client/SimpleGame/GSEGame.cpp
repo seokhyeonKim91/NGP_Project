@@ -63,9 +63,6 @@ void GSEGame::RendererGameScene()
 				case PlayerColor::RED:
 					m_renderer->DrawSolidRect((i - MAP_SIZE / 2) * 20, (j - MAP_SIZE / 2) * 20, 0, 16, 1.0f, 0.0f, 0.0f, 1.0f);	//»¡°­
 					break;
-				case PlayerColor::GREEN:
-					m_renderer->DrawSolidRect((i - MAP_SIZE / 2) * 20, (j - MAP_SIZE / 2) * 20, 0, 16, 0.0f, 1.0f, 0.0f, 1.0f);	//ÃÊ·Ï
-					break;
 				case PlayerColor::BLUE:
 					m_renderer->DrawSolidRect((i - MAP_SIZE / 2) * 20, (j - MAP_SIZE / 2) * 20, 0, 16, 0.0f, 0.0f, 1.0f, 1.0f);	//ÆÄ¶û
 					break;
