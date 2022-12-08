@@ -200,10 +200,10 @@ void SendServer(void)
 
 void RecvClient(void)
 {
-	retval = recvn(sock, (char*)(&mapData), sizeof(mapData), 0);
+	retval = recvn(sock, reinterpret_cast<char*>(&mapData), sizeof(mapData), 0);
 	if (retval == SOCKET_ERROR) 
 	{
-		err_display("");
+		err_display("mapdart recv error");
 	}
 	g_game->SetMapData(mapData);
 	g_game->RendererGameScene();
