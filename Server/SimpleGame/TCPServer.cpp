@@ -233,8 +233,13 @@ DWORD WINAPI ProcessThread2(LPVOID arg)
         MapData md[MAP_SIZE][MAP_SIZE];
 
         for (int i = 0; i < MAP_SIZE; i++)
+        {
             for (int j = 0; j < MAP_SIZE; j++)
-                md[i][j] = gameData.GetMapData(i, j);
+            {
+                md[i][j] = gameData.GetMapData(i, j);             
+            }         
+        }
+      
 
         retval = send(client_sock, (char*)&md, sizeof(md), 0);
 

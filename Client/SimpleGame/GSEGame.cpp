@@ -34,7 +34,6 @@ void GSEGame::RendererGameScene()
 	{
 		for (int j = 0; j < MAP_SIZE; j++)
 		{
-
 			if (m_pMapdata[i][j].isBomb == true)		//ÆøÅºÀÌ ÀÖÀ» °æ¿ì
 			{
 				m_renderer->DrawSolidRect((i - MAP_SIZE / 2) * 20, (j - MAP_SIZE / 2) * 20, 0, 20, 0.4f, 0.4f, 0.4f, 1.0f);		//¾îµÎ¿î È¸»ö
@@ -53,6 +52,10 @@ void GSEGame::RendererGameScene()
 				{
 				case Item::BALLON:
 					m_renderer->DrawSolidRect((i - MAP_SIZE / 2) * 20, (j - MAP_SIZE / 2) * 20, 0, 20, 0.0f, 1.0f, 1.0f, 1.0f);	//ÇÏ´Ã»ö
+					break;
+
+				case Item::POTION:
+					m_renderer->DrawSolidRect((i - MAP_SIZE / 2) * 20, (j - MAP_SIZE / 2) * 20, 0, 20, 1.0f, 0.0f, 1.0f, 1.0f);	//
 					break;
 				}
 			}
@@ -86,6 +89,8 @@ void GSEGame::SetMapData(MapData(*map_data)[MAP_SIZE])
 			m_pMapdata[i][j].item = map_data[i][j].item;
 			m_pMapdata[i][j].isBombFrame = map_data[i][j].isBombFrame;
 			m_pMapdata[i][j].playerColor = map_data[i][j].playerColor;
+			
+
 		}
 	}
 }

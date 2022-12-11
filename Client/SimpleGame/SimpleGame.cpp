@@ -20,7 +20,7 @@ but WITHOUT ANY WARRANTY.
 
 #include "Title.h"
 
-#define SERVERIP "10.30.2.24"
+#define SERVERIP "192.168.35.143"
 #define SERVERPORT 9000
 #define BUFSIZE    512
 
@@ -58,7 +58,6 @@ bool collision(void)
 void MakeBomb(void)
 {
 	mapData[bx[bombnum]][by[bombnum]].isBomb = true;
-	bombnum++;
 }
 
 void Idle(void)
@@ -153,24 +152,6 @@ void err_display(char* msg)
 {
 }
 
-int recvn(SOCKET s, char* buf, int len, int flags) //서버에서 받은 데이터 처리
-{
-	int data; // 내부적으로 호출하는 recv() 함수의 리턴 값을 저장하는 변수
-	char* ptr = buf; // 포인터 변수 ptr은 응용 프로그램의 버퍼의 시작 주소
-	int left = len; // left 변수는 아직 읽지 않은 데이터 크기
-
-	while (left > 0) 
-	{
-		data = recv(s, ptr, left, flags);
-		if (data == SOCKET_ERROR)
-			return SOCKET_ERROR;
-		
-		left -= data;
-		ptr += data;
-	}
-	return (len - left); // 버퍼에 복사한 바이트 수를 리턴
-}
-
 void ConnectServer(void)
 {
 	// 서버 연결()
@@ -200,7 +181,8 @@ void SendServer(void)
 
 void RecvClient(void)
 {
-	retval = recvn(sock, (char*)(&mapData), sizeof(mapData), 0);
+	retval = recv(sock, (char*)(&mapData), sizeof(mapData), 0);	
+
 	if (retval == SOCKET_ERROR) 
 	{
 		err_display("mapdata recv error");
