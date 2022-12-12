@@ -20,7 +20,7 @@ but WITHOUT ANY WARRANTY.
 
 #include "Title.h"
 
-#define SERVERIP "192.168.35.143"
+char* SERVERIP = { 0 };
 #define SERVERPORT 9000
 #define BUFSIZE    512
 
@@ -220,6 +220,8 @@ void RenderScene(int temp)
 
 int main(int argc, char** argv)
 {
+	SERVERIP = argv[1];
+
 	// Initialize GL things
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
