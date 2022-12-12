@@ -18,7 +18,6 @@
 #define GSE_WINDOW_WIDTH 800
 #define GSE_WINDOW_HEIGHT 800
 #define BOMB_TIME 30
-#define BOMB_MAX 6
 
 struct KeyInput //키 입력 on off
 {
@@ -48,13 +47,6 @@ struct BombData		//폭탄 타이머 및 폭탄 위치값 저장용
 	BombData(int px, int py, std::chrono::system_clock::time_point count, int length, int id) { bombPoint.X = px; bombPoint.Y = py; bombCountdown = count; bombExplosionLength = length; playerID = id; }
 };
 
-enum Item
-{
-	EMPTY,
-	BALLON,				//폭탄 개수 증가
-	POTION,				//폭탄 길이 증가
-};
-
 enum PlayerColor
 {
 	RED,
@@ -76,7 +68,6 @@ struct Player  //플레이어의 소켓, 물줄기, 이동속도, 위치, 상태를 저장
 
 struct MapData
 {
-	Item 					item; // 아이템이 있는지
 	bool					isRock; //막혀있는 곳
 	bool 					isBomb; //폭탄이있는지
 	bool					isBombFrame;	//폭탄 불길이 있는지

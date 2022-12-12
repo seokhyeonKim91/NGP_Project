@@ -19,12 +19,6 @@ ServerData::ServerData()
 			else
 				m_mapData[i][j].isRock = false;
 
-			if ((m_mapData[i][j].isRock == false) && (i % 6 == 2 && j % 5 == 1)) //æ∆¿Ã≈€µŒ±‚
-				m_mapData[i][j].item = Item::POTION;
-			else if ((m_mapData[i][j].isRock == false) && (i % 8 == 3 && j % 6 == 3))
-				m_mapData[i][j].item = Item::BALLON;
-			else
-				m_mapData[i][j].item = Item::EMPTY;
 			m_mapData[i][j].playerColor = PlayerColor::PLAYEREMPTY;
 		}
 	}
@@ -50,16 +44,7 @@ void ServerData::Update()
 				{
 					m_players[i].playerPosition.Y -= 1;
 				}
-				if (m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item == Item::POTION)
-				{
-					m_players[i].playerBombLength++;
-					m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item = Item::EMPTY;
-				}
-				else if (m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item == Item::BALLON)
-				{
-					m_players[i].playerBombCount++;
-					m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item = Item::EMPTY;
-				}
+				
 				m_players[i].playerKeyInput.key_Down = false;
 			}
 			if (m_players[i].playerKeyInput.key_Up) //¿ß≈∞
@@ -68,16 +53,7 @@ void ServerData::Update()
 				{
 					m_players[i].playerPosition.Y += 1;
 				}
-				if (m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item == Item::POTION)
-				{
-					m_players[i].playerBombLength++;
-					m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item = Item::EMPTY;
-				}
-				else if (m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item == Item::BALLON)
-				{
-					m_players[i].playerBombCount++;
-					m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item = Item::EMPTY;
-				}
+				
 				m_players[i].playerKeyInput.key_Up = false;
 			}
 			if (m_players[i].playerKeyInput.key_Left) // øﬁ¬ 
@@ -86,16 +62,7 @@ void ServerData::Update()
 				{
 					m_players[i].playerPosition.X -= 1;
 				}
-				if (m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item == Item::POTION)
-				{
-					m_players[i].playerBombLength++;
-					m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item = Item::EMPTY;
-				}
-				else if (m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item == Item::BALLON)
-				{
-					m_players[i].playerBombCount++;
-					m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item = Item::EMPTY;
-				}
+				
 				m_players[i].playerKeyInput.key_Left = false;
 			}
 			if (m_players[i].playerKeyInput.key_Right)
@@ -104,16 +71,7 @@ void ServerData::Update()
 				{
 					m_players[i].playerPosition.X += 1;
 				}
-				if (m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item == Item::POTION)
-				{
-					m_players[i].playerBombLength++;
-					m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item = Item::EMPTY;
-				}
-				else if (m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item == Item::BALLON)
-				{
-					m_players[i].playerBombCount++;
-					m_mapData[m_players[i].playerPosition.X][m_players[i].playerPosition.Y].item = Item::EMPTY;
-				}
+				
 				m_players[i].playerKeyInput.key_Right = false;
 			}
 			if (m_players[i].playerKeyInput.key_Space)				//∆¯≈∫ √≥∏Æ
@@ -248,8 +206,8 @@ void ServerData::CreatePlayer(SOCKET socket)
 		m_players[1].playerPosition.Y = Y2;
 	}
 
-	m_players[m_nPlayer].playerBombCount = 1;
-	m_players[m_nPlayer].playerBombLength = 1;
+	m_players[m_nPlayer].playerBombCount = 3;
+	m_players[m_nPlayer].playerBombLength = 3;
 	m_players[m_nPlayer].playerColor = PlayerColor(m_nPlayer);
 
 	++m_nPlayer;

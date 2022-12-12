@@ -8,15 +8,6 @@
 #define BOMB_TIME 30
 #define BOMB_MAX 6
 
-
-enum Item
-{
-	EMPTY,
-	BALLON, //폭탄 개수 증가
-	SHOES, //플레이어 이동 속도 증가
-	POTION, //폭탄 길이 증가
-};
-
 enum PlayerColor
 {
 	RED,
@@ -32,7 +23,6 @@ struct Point
 
 struct MapData
 {
-	Item 	item; // 아이템이 있는지
 	bool	isRock; //막혀있는 곳
 	bool 	isBomb; //폭탄이있는지
 	bool	isBombFrame;	//폭탄 불길이 있는지
