@@ -9,7 +9,7 @@ public:
 	~ServerData();
 
 private:
-	Player					m_players[MAX_PLAYER];
+	PlayerStatus					m_players[MAX_PLAYER];
 	int						m_nPlayer = 0;
 	std::vector<BombData>	m_bombManger;
 	MapData					m_mapData[MAP_SIZE][MAP_SIZE];

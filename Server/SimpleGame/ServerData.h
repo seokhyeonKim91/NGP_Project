@@ -54,7 +54,7 @@ enum PlayerColor
 	PLAYEREMPTY,
 };
 
-struct Player  //플레이어의 소켓, 물줄기, 이동속도, 위치, 상태를 저장
+struct PlayerStatus  //플레이어의 소켓, 물줄기, 이동속도, 위치, 상태를 저장
 {
 	SOCKET					playerSocket;
 	KeyInput				playerKeyInput;
