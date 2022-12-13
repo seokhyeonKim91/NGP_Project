@@ -260,6 +260,8 @@ DWORD WINAPI ProcessThread2(LPVOID arg)
 
 DWORD WINAPI GameThread(LPVOID arg)
 {
+    SetThreadPriority(GThread, THREAD_PRIORITY_BELOW_NORMAL);
+
     while (true)
     {
         gameData.Update();
