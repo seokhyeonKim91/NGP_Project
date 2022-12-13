@@ -43,7 +43,7 @@ void GSEGame::RendererGameScene()
 			}
 			if (m_pMapdata[i][j].isBombFrame == true)		//벽이 있을 경우
 			{
-				m_renderer->DrawSolidRect((i - MAP_SIZE / 2) * 20, (j - MAP_SIZE / 2) * 20, 0, 20, 0.5f, 0.3f, 0.0f, 1.0f);		//
+				m_renderer->DrawSolidRect((i - MAP_SIZE / 2) * 20, (j - MAP_SIZE / 2) * 20, 0, 20, 0.5f, 0.3f, 0.0f, 1.0f);		//주황색
 			}
 			
 			if (m_pMapdata[i][j].playerColor != PlayerColor::PLAYEREMPTY)

@@ -167,7 +167,8 @@ void ConnectServer(void)
 	{
 		err_quit("");
 	}
-	GameState = true;
+	else
+		GameState = true;
 }
 
 void SendServer(void)
