@@ -6,7 +6,7 @@ bool GameState = false;
 //SceneData 만들기!
 ServerData gameData;
 HANDLE Event;
-HANDLE TThread, GThread, PThread;
+HANDLE MThread, GThread, PThread;
 
 DWORD WINAPI ProcessThread1(LPVOID arg);
 DWORD WINAPI ProcessThread2(LPVOID arg);
@@ -44,8 +44,8 @@ void err_display(char* msg)
 }
 ////////////////////////////////////////////////////////////////////
 
-// 타이틀 쓰레드 구현
-DWORD WINAPI TitleThread(LPVOID arg)
+//매칭 쓰레드 구현
+DWORD WINAPI MatchingThread(LPVOID arg)
 {   
     int retval;
 
@@ -111,14 +111,14 @@ DWORD WINAPI TitleThread(LPVOID arg)
             gameData.CreatePlayer(MatchingQueue[0]);
             retval = send(MatchingQueue[0], (char*)&GameState, sizeof(GameState), 0);
             PThread = CreateThread(NULL, 0, ProcessThread1, (LPVOID)MatchingQueue[0], 0, NULL);
-            if (PThread == NULL) { printf("Thread1 NULL"); closesocket(MatchingQueue[0]); }
+            if (PThread == NULL) { printf("Phread1 NULL"); closesocket(MatchingQueue[0]); }
 
             gameData.CreatePlayer(MatchingQueue[1]);
             retval = send(MatchingQueue[1], (char*)&GameState, sizeof(GameState), 0);
             PThread = CreateThread(NULL, 0, ProcessThread2, (LPVOID)MatchingQueue[1], 0, NULL);
-            if (PThread == NULL) { printf("Thread2 NULL"); closesocket(MatchingQueue[1]); }
+            if (PThread == NULL) { printf("Phread2 NULL"); closesocket(MatchingQueue[1]); }
 
-            printf("Exit Title Thread()\n");
+            printf("Exit Matching Thread()\n");
 
             ExitThread(0);
         }
@@ -272,8 +272,8 @@ int main(int argc, char* argv[])
     Event = CreateEvent(NULL, FALSE, TRUE, NULL);
     if (Event == NULL) return 1;
 
-    TThread = CreateThread(NULL, 0, TitleThread, NULL, 0, NULL);
-    if (TThread == NULL)
+    MThread = CreateThread(NULL, 0, MatchingThread, NULL, 0, NULL);
+    if (MThread == NULL)
         printf("Create TThread Error\n");
 
     GThread = CreateThread(NULL, 0, GameThread, NULL, 0, NULL);

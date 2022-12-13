@@ -32,7 +32,7 @@ ServerData::~ServerData()
 void ServerData::Update()
 {
 	///////////////////////
-	for (int i = 0; i < MAX_PLAYER; i++) //변경해야함
+	for (int i = 0; i < MAX_PLAYER; i++) 
 	{		
 		if (m_players[i].isAlive)
 		{
